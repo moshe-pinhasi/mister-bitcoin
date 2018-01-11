@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './ContactsPage.css';
 
 import ContactsList from '../ContactsList/ContactsList'
 import ContactService from '../../services/ContactService'

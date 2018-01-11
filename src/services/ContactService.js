@@ -137,7 +137,19 @@ const contacts = [
 
 function getContacts () {
     return new Promise((resolve, reject) => {
-      resolve(contacts);
+      const c = contacts.sort( (a, b) => {
+        if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+          return -1;
+        }
+        if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+          return 1;
+        }
+
+        return 0;
+      })
+      console.log(c)
+      console.log(c)
+      resolve(c);
     })
 }
 
