@@ -18,7 +18,6 @@ class App extends Component {
             <header className="app-header">
               <NavLink to="/"><i className="flaticon-presentation-board-with-graph"></i></NavLink>
               <NavLink to="/contacts"><i className="flaticon-group-of-businessmen"></i></NavLink>
-              {/* <NavLink to="/"><i className="flaticon-handshake"></i></NavLink> */}
             </header>
 
             <div className="app-content">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './ContactFilter.css'
 
 class ContactFilter extends Component {
     constructor(props) {
@@ -25,3 +26,4 @@ class ContactFilter extends Component {
 }
 
 export default ContactFilter
+

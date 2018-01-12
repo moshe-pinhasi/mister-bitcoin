@@ -1,0 +1,16 @@
+.contact-filter {
+    
+    input {
+        width: 100%;
+        height: 30px;
+        padding: 0 10px;
+        font-size: 12px;
+        box-sizing : border-box;
+        border-radius: 5px;
+        border: 1px solid #D8D8D8;
+        
+        &:focus{
+            outline: none;
+        }
+    }
+}

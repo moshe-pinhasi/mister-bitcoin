@@ -32,7 +32,7 @@ class ContactPage extends Component {
     return (
       <div className="contacts-page">
         <div className="search-container">
-            <ContactFilter onFilter={this.contactSearch} />
+          <ContactFilter onFilter={this.contactSearch} />
         </div>
         <div className="contacts-container">
             <ContactList contacts={this.state.contacts} />
