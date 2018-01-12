@@ -174,16 +174,39 @@ function deleteContact(id) {
 
 function saveContact(contact) {
   return new Promise((resolve, reject) => { 
+    const index = contacts.findIndex( c => contact._id === c._id)
+    if (index !== -1) {
+      contacts[index] = contact
+    }
+
+    resolve(contacts)
+  })
+}
+
+function addContact(contact) {
+  return new Promise((resolve, reject) => { 
     contacts.push(contact)
     resolve(contacts)
   })
+}
+
+function getEmptyContact() {
+  return {
+    _id: '',
+    picture: '',
+    name: '',
+    email: '',
+    phone: ''
+  }
 }
 
 export default {
   getContacts,
   getContactById,
   deleteContact,
-  saveContact
+  saveContact,
+  addContact,
+  getEmptyContact
 }
 
 

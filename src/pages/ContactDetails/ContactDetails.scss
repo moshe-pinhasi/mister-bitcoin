@@ -1,10 +1,16 @@
 .contact-details {
  
-    &-footer {
+    &-header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        height: 40px;
+        
         a:not(:last-child) {
             margin: 0 10px 0 0;
         }
+    }
+
+    .contact-details-row {
+        margin: 10px 0 0 0;
     }
 }

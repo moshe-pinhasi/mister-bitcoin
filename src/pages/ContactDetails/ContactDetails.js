@@ -27,19 +27,16 @@ class ContactDetails  extends Component {
   render() {
     return (
       <div className="contact-details">
-        <div className="contact-details-body">
-          <img src={imAvatar} alt="Person" width="96" height="96" /><hr />
-          <div className="contact-details-row">Name: {this.state.contact.name}</div><hr />
-          <div className="contact-details-row">Phone: {this.state.contact.phone}</div><hr />
-          <div className="contact-details-row">Email: {this.state.contact.email}</div><hr />
-        </div>
-        
-        <br />
-        <br />
-        <footer className="contact-details-footer">
+        <header className="contact-details-header">
           <Link to={`/contacts`} >Back</Link>
           <Link to={`/contacts/edit/${this.state.contact._id}`}>Edit</Link>
-        </footer>
+        </header>
+        <div className="contact-details-body">
+          <img src={imAvatar} alt="Person" width="96" height="96" />
+          <div className="contact-details-row">Name: {this.state.contact.name}</div>
+          <div className="contact-details-row">Phone: {this.state.contact.phone}</div>
+          <div className="contact-details-row">Email: {this.state.contact.email}</div>
+        </div>
       </div>
     )
   }

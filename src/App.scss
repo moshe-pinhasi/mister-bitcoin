@@ -7,8 +7,9 @@
 
     .app-header {
         display: flex;
-        justify-content: space-between;
-        padding: 20px;
+        justify-content: space-around;
+        padding: 8px 20px;
+        border-bottom: 1px solid;
     }
 
     .app-content {
@@ -16,5 +17,12 @@
         height: 400px;
         overflow-x: hidden;
         overflow-y: auto;
+    }
+
+    [class^="flaticon-"]:before, 
+    [class*=" flaticon-"]:before, 
+    [class^="flaticon-"]:after, 
+    [class*=" flaticon-"]:after {
+        margin: 0;
     }
 }
