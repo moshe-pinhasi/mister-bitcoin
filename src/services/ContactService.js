@@ -135,34 +135,55 @@ const contacts = [
   }
 ];
 
-function getContacts () {
-    return new Promise((resolve, reject) => {
-      const c = contacts.sort( (a, b) => {
-        if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
-          return -1;
-        }
-        if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
-          return 1;
-        }
+function sort(arr) {
+  return arr.sort( (a, b) => {
+    if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+      return 1;
+    }
 
-        return 0;
-      })
-      console.log(c)
-      console.log(c)
-      resolve(c);
+    return 0;
+  })
+}
+
+function getContacts () {
+  return new Promise((resolve, reject) => { 
+    resolve(sort(contacts))
+  })
+}
+
+function getContactById (id) {
+    return new Promise((resolve, reject) => {
+      const contact = contacts.find( contact => contact._id === id)
+      contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
     })
 }
 
-function findContactById (id) {
-    return new Promise((resolve, reject) => {
-        const contact = contacts.find( contact => contact._id === id)
-        contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
-    })
+function deleteContact(id) {
+  return new Promise((resolve, reject) => { 
+    const index = contacts.findIndex( contact => contact._id === id)
+    if (index !== -1) {
+      contacts.splice(index, 1)
+    }
+
+    resolve(contacts)
+  })
+}
+
+function saveContact(contact) {
+  return new Promise((resolve, reject) => { 
+    contacts.push(contact)
+    resolve(contacts)
+  })
 }
 
 export default {
-    getContacts,
-    findContactById
+  getContacts,
+  getContactById,
+  deleteContact,
+  saveContact
 }
 
 

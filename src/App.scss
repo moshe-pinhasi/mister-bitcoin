@@ -1,0 +1,20 @@
+.app {
+    max-width: 300px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 30px auto;
+
+    .app-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    .app-content {
+        padding: 20px 0 0 0;
+        height: 400px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import ContactsList from '../ContactsList/ContactsList'
+import ContactList from '../../components/ContactList/ContactList'
 import ContactService from '../../services/ContactService'
 
-class ContactsPage extends Component {
+class ContactPage extends Component {
     
   constructor(props) {
     super(props);
@@ -24,10 +24,10 @@ class ContactsPage extends Component {
   render() {
     return (
       <div className="contacts-page">
-          <ContactsList contacts={this.state.contacts} />
+          <ContactList contacts={this.state.contacts} />
       </div>
     );
   }
 }
 
-export default ContactsPage;
+export default ContactPage;

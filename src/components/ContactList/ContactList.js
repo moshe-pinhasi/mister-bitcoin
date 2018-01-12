@@ -1,13 +1,14 @@
 import React from 'react';
-import './ContactsList.css';
+import { Link } from 'react-router-dom';
+import './ContactList.css';
 
 import ContactPreview from '../ContactPreview/ContactPreview'
 
-const ContactsList = (props) => {
+const ContactList = (props) => {
   const contactsPreview = props.contacts.map( (contact, i) => {
       return (
           <li key={contact._id} className="contacts-list-item">
-            <ContactPreview contact={contact} />
+            <Link to={`/contacts/${contact._id}`}><ContactPreview contact={contact} /></Link>
           </li>
       )
   });
@@ -21,4 +22,4 @@ const ContactsList = (props) => {
   );
 }
 
-export default ContactsList;
+export default ContactList;
