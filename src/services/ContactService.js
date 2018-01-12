@@ -200,10 +200,24 @@ function getEmptyContact() {
   }
 }
 
+function filter (term) {
+  term = term.toLocaleLowerCase()
+  return new Promise((resolve, reject) => { 
+    const c = contacts.filter( contact => {
+      return contact.name.toLocaleLowerCase().includes(term) ||
+             contact.phone.toLocaleLowerCase().includes(term) ||
+             contact.email.toLocaleLowerCase().includes(term)
+    })
+
+    resolve(c)
+  })
+}
+
 export default {
   getContacts,
   getContactById,
   deleteContact,
+  filter,
   saveContact,
   addContact,
   getEmptyContact
