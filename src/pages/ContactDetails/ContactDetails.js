@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchContact } from '../../actions'
+import { fetchContact } from '../../actions/contacts.actions'
 
 import imAvatar from '../../assets/img_avatar.png'
 import './ContactDetails.css'

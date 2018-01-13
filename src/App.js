@@ -1,16 +1,44 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { loadUser } from './actions/user.actions'
+
 import HomePage from './pages/HomePage/HomePage'
 import ContactPage from './pages/ContactPage/ContactPage'
+import SignupPage from './pages/SignupPage/SignupPage'
 import ContactDetails from './pages/ContactDetails/ContactDetails'
 import ContactEdit from './pages/ContactEdit/ContactEdit'
+import PrivateRoute from './containers/PrivateRoute'
 
 import './App.css'
 import './assets/icon-font/flaticon.css'
 
 class App extends Component {
   
+  constructor(props) {
+    super(props)
+
+    this.state = {loading: true}    
+  }
+
+  componentDidMount() {
+    this.props.loadUser( () => {
+      setTimeout( () => {
+        this.setState({loading: false})  
+      }, 1000)
+      
+    })
+  }
+
   render() {
+    
+    if (this.state.loading) {
+      return (
+        <div className="app loading">loading...</div>
+      )
+    }
+
     return (
       <div className="app">
         <Router>
@@ -22,11 +50,12 @@ class App extends Component {
 
             <div className="app-content">
               <Switch>
-                <Route path="/contacts/edit/:id" component={ContactEdit} />
-                <Route path="/contacts/edit/" component={ContactEdit} />
-                <Route path="/contacts/:id" component={ContactDetails} />
-                <Route path="/contacts" component={ContactPage} />
-                <Route path="/" component={HomePage} />  
+                <PrivateRoute path="/contacts/edit/:id" component={ContactEdit} />
+                <PrivateRoute path="/contacts/edit/" component={ContactEdit} />
+                <PrivateRoute path="/contacts/:id" component={ContactDetails} />
+                <PrivateRoute path="/contacts" component={ContactPage} />
+                <Route path="/signup" component={SignupPage} />
+                <PrivateRoute path="/" component={HomePage} />  
               </Switch>
             </div>
           </div>
@@ -36,4 +65,8 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({loadUser}, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(App);

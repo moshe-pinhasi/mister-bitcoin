@@ -1,4 +1,4 @@
-import { SET_CONTACTS, FILTER_CONTACTS } from '../actions';
+import { SET_CONTACTS, FILTER_CONTACTS } from '../actions/contacts.actions';
 
 const contacts = (state = [], action) => {
     switch (action.type) {

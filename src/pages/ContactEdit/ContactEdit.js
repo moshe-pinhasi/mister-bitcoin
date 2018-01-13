@@ -2,7 +2,7 @@ import React, { Component }  from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { fetchContact, saveContact, deleteContact } from '../../actions'
+import { fetchContact, saveContact, deleteContact } from '../../actions/contacts.actions'
 
 import ContactService from '../../services/ContactService'
 
@@ -57,9 +57,10 @@ class ContactEdit  extends Component {
         this.props.history.push(`/contacts/${contact._id}`))  
   }
 
-  onDeleteContact = () => {
+  onDeleteContact = (event) => {
+    event.preventDefault()
     this.props.deleteContact(this.state.contact._id, () =>
-        this.props.history.push(`/contacts`))
+          this.props.history.push(`/contacts`))
   }
   
   render() {

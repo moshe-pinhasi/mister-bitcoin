@@ -1,10 +1,10 @@
 import ContactsService from '../services/ContactService'
 
-export const SET_CONTACTS = 'SET_CONTACTS'
-export const SELECTED_CONTACT = 'SELECTED_CONTACT'
-export const CONTACT_SAVED = 'CONTACT_SAVED'
-export const FILTER_CONTACTS = 'FILTER_CONTACTS'
-export const DELETE_CONTACT = 'DELETE_CONTACT'
+export const SET_CONTACTS = 'CONTACTS/SET_CONTACTS'
+export const SELECTED_CONTACT = 'CONTACTS/SELECTED_CONTACT'
+export const CONTACT_SAVED = 'CONTACTS/CONTACT_SAVED'
+export const FILTER_CONTACTS = 'CONTACTS/FILTER_CONTACTS'
+export const DELETE_CONTACT = 'CONTACTS/DELETE_CONTACT'
 
 export function loadContacts() {
     const request = ContactsService.getContacts()

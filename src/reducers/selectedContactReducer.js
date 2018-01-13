@@ -1,4 +1,4 @@
-import { SELECTED_CONTACT, DELETE_CONTACT } from '../actions';
+import { SELECTED_CONTACT, DELETE_CONTACT } from '../actions/contacts.actions';
 
 const selectedContact = (state = null, action) => {
     switch (action.type) {
