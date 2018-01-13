@@ -1,6 +1,8 @@
 .contact-edit {
     
     &-header {
+        display: flex;
+        justify-content: space-between;
         height: 40px;
         
         a:not(:last-child) {

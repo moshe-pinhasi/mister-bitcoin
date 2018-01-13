@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import ContactList from '../../components/ContactList/ContactList'
 import ContactService from '../../services/ContactService'
@@ -24,7 +25,6 @@ class ContactPage extends Component {
   }
 
   contactSearch = (term) => {
-    console.log(term)
     ContactService.filter(term).then(contacts => this.setState({contacts}))
   }
   
@@ -37,7 +37,9 @@ class ContactPage extends Component {
         <div className="contacts-container">
             <ContactList contacts={this.state.contacts} />
         </div>
-          
+        <div className="action-container">
+          <Link to={'/contacts/edit/'}>+</Link>
+        </div>
       </div>
     );
   }

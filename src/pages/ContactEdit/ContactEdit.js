@@ -1,9 +1,21 @@
 import React, { Component }  from 'react';
 import { Link } from 'react-router-dom';
+
+import ContactService from '../../services/ContactService'
+
 import './ContactEdit.css'
 import imAvatar from '../../assets/img_avatar.png'
 
-import ContactService from '../../services/ContactService'
+const Header = ({contact, onDeleteContact}) => {
+  const backUrl = contact._id ? `/contacts/${contact._id}` : `/contacts`
+
+  return (
+    <header className="contact-edit-header">
+      <Link to={backUrl}>Back</Link>
+      {contact._id ? (<Link to='/' onClick={onDeleteContact}>Delete</Link>) : ''}
+    </header>
+  )
+}
 
 class ContactEdit  extends Component {
   constructor(props) {
@@ -17,6 +29,8 @@ class ContactEdit  extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id; // params -> from url
+    if (!id) return
+    
     this.fetchContact(id);
   }
 
@@ -41,15 +55,18 @@ class ContactEdit  extends Component {
       this.setState({contact: ContactService.getEmptyContact() })
       this.props.history.push(`/contacts/${contact._id}`)
     })    
-}
+  }
+
+  onDeleteContact = () => {
+    ContactService.deleteContact(this.state.contact._id)
+      .then( () => this.props.history.push(`/contacts`))
+  }
 
   render() {
     const {contact} = this.state
     return (
       <div className="contact-edit">
-        <header className="contact-edit-header">
-          <Link to={`/contacts/${contact._id}`} >Back</Link>
-        </header>
+        <Header contact={contact} onDeleteContact={this.onDeleteContact}/>
         <div className="contact-edit-body">
           <img src={imAvatar} alt="Person" width="96" height="96" />
           
