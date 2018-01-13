@@ -1,3 +1,4 @@
+import uniqid from 'uniqid'
 
 const contacts = [
   {
@@ -157,7 +158,7 @@ function getContacts () {
 function getContactById (id) {
     return new Promise((resolve, reject) => {
       const contact = contacts.find( contact => contact._id === id)
-      contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
+      contact ? resolve(Object.assign({}, contact)) : reject(`Contact id ${id} not found!`)
     })
 }
 
@@ -172,7 +173,7 @@ function deleteContact(id) {
   })
 }
 
-function saveContact(contact) {
+function _updateContact(contact) {
   return new Promise((resolve, reject) => { 
     const index = contacts.findIndex( c => contact._id === c._id)
     if (index !== -1) {
@@ -183,16 +184,20 @@ function saveContact(contact) {
   })
 }
 
-function addContact(contact) {
+function _addContact(contact) {
   return new Promise((resolve, reject) => { 
+    contact._id = uniqid()
     contacts.push(contact)
     resolve(contacts)
   })
 }
 
+function saveContact(contact) {
+  return contact._id ? _updateContact(contact) : _addContact(contact)
+}
+
 function getEmptyContact() {
   return {
-    _id: '',
     picture: '',
     name: '',
     email: '',
@@ -219,7 +224,6 @@ export default {
   deleteContact,
   filter,
   saveContact,
-  addContact,
   getEmptyContact
 }
 

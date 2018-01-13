@@ -1,31 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { loadContacts, filterContacts } from '../../actions'
 
 import ContactList from '../../components/ContactList/ContactList'
-import ContactService from '../../services/ContactService'
 import ContactFilter from '../../components/ContactFilter/ContactFilter'
+
 import './ContactPage.css'
 
 class ContactPage extends Component {
-    
-  constructor(props) {
-    super(props);
 
-    this.state = { 
-      contacts: []
-    };
-
-    this.loadContacts();
-  }
-
-  loadContacts() {
-    ContactService.getContacts().then (contacts => {
-      this.setState({contacts})
-    })
+  componentDidMount() {
+    this.props.loadContacts()
   }
 
   contactSearch = (term) => {
-    console.log(term)
-    ContactService.filter(term).then(contacts => this.setState({contacts}))
+    this.props.filterContacts(term)
   }
   
   render() {
@@ -35,12 +25,21 @@ class ContactPage extends Component {
           <ContactFilter onFilter={this.contactSearch} />
         </div>
         <div className="contacts-container">
-            <ContactList contacts={this.state.contacts} />
+            <ContactList contacts={this.props.contacts} />
         </div>
-          
       </div>
     );
   }
 }
 
-export default ContactPage;
+function mapStateToProps(state) {
+  return {
+    contacts: state.contacts
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({loadContacts, filterContacts}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);

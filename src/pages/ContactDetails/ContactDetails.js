@@ -1,46 +1,47 @@
 import React, { Component }  from 'react';
 import { Link } from 'react-router-dom';
-import './ContactDetails.css'
-import imAvatar from '../../assets/img_avatar.png'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { fetchContact } from '../../actions'
 
-import ContactService from '../../services/ContactService'
+import imAvatar from '../../assets/img_avatar.png'
+import './ContactDetails.css'
 
 class ContactDetails  extends Component {
-  constructor(props) {
-    super(props)
 
-    this.state =  { contact: {} }
-  }
-
-  componentWillMount() {
+  componentDidMount() {
     const id = this.props.match.params.id; // params -> from url
-    this.fetchContact(id);
-  }
-
-  fetchContact(id) {
-    ContactService.getContactById(id)
-      .then( contact => {
-        this.setState( {contact})
-      })
+    this.props.fetchContact(id)
   }
 
   render() {
+    const contact = this.props.contact || {}
+
     return (
       <div className="contact-details">
         <header className="contact-details-header">
           <Link to={`/contacts`} >Back</Link>
-          <Link to={`/contacts/edit/${this.state.contact._id}`}>Edit</Link>
+          <Link to={`/contacts/edit/${contact._id}`}>Edit</Link>
         </header>
         <div className="contact-details-body">
           <img src={imAvatar} alt="Person" width="96" height="96" />
-          <div className="contact-details-row">Name: {this.state.contact.name}</div>
-          <div className="contact-details-row">Phone: {this.state.contact.phone}</div>
-          <div className="contact-details-row">Email: {this.state.contact.email}</div>
+          <div className="contact-details-row">Name: {contact.name}</div>
+          <div className="contact-details-row">Phone: {contact.phone}</div>
+          <div className="contact-details-row">Email: {contact.email}</div>
         </div>
       </div>
     )
   }
-  
 }
 
-export default ContactDetails;
+function mapStateToProps(state) {
+  return {
+    contact: state.selectedContact
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchContact}, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactDetails);
