@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { loadContacts, filterContacts } from '../../actions'
+import { Link } from 'react-router-dom';
 
 import ContactList from '../../components/ContactList/ContactList'
 import ContactFilter from '../../components/ContactFilter/ContactFilter'
@@ -29,7 +30,7 @@ class ContactPage extends Component {
         </div>
 
         <div className="action-container">
-          <button>+</button>
+          <Link to={'/contacts/edit/'}>+</Link>
         </div>
       </div>
     );

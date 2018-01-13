@@ -23,6 +23,7 @@ class App extends Component {
             <div className="app-content">
               <Switch>
                 <Route path="/contacts/edit/:id" component={ContactEdit} />
+                <Route path="/contacts/edit/" component={ContactEdit} />
                 <Route path="/contacts/:id" component={ContactDetails} />
                 <Route path="/contacts" component={ContactPage} />
                 <Route path="/" component={HomePage} />  

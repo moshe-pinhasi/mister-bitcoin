@@ -9,6 +9,18 @@ import ContactService from '../../services/ContactService'
 import imAvatar from '../../assets/img_avatar.png'
 import './ContactEdit.css'
 
+
+const Header = ({contact, onDeleteContact}) => {
+  const backUrl = contact._id ? `/contacts/${contact._id}` : `/contacts`
+
+  return (
+    <header className="contact-edit-header">
+      <Link to={backUrl}>Back</Link>
+      {contact._id ? (<Link to='/' onClick={onDeleteContact}>Delete</Link>) : ''}
+    </header>
+  )
+}
+
 class ContactEdit  extends Component {
 
   constructor(props) {
@@ -21,6 +33,8 @@ class ContactEdit  extends Component {
 
   componentDidMount() {
     const id = this.props.match.params.id; // params -> from url
+    if (!id) return
+    
     this.props.fetchContact(id)
   }
 
@@ -49,14 +63,12 @@ class ContactEdit  extends Component {
   }
   
   render() {
-    const {contact} = this.state // better option - to add condition and show ""loading
+    const {contact} = this.state  
 
     return (
       <div className="contact-edit">
-          <header className="contact-edit-header">
-            <Link to={`/contacts/${contact._id}`}>Back</Link>
-            <Link to='/' onClick={this.onDeleteContact}>Delete</Link>
-          </header>
+          <Header contact={contact} onDeleteContact={this.onDeleteContact}/>
+
           <div className="contact-edit-body">
               <img src={imAvatar} alt="Person" width="96" height="96" />
               <form onSubmit={this.onFormSubmit} className="contact-edit-form">
