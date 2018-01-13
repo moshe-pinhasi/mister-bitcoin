@@ -7,3 +7,35 @@ a, a:visited, a:hover, a:active {
     text-decoration: none;
     color: inherit; 
 }
+
+.form-group {
+    display: flex;
+    justify-content: start;
+    margin: 20px 0 0 0;
+}
+
+.form-group label {
+    margin: 0 15px 0 0;
+}
+
+.form-group input {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #D8D8D8;
+}
+
+.form-group input:focus{
+    outline: none;
+}
+
+.form-actions-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0 0 0;   
+}
+
+.form-actions-container button {
+    cursor: pointer;
+}

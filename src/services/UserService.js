@@ -18,7 +18,8 @@ function saveUser(user) {
 function getEmptyUser() {
   return {
     name: '',
-    coins: 100
+    coins: 100,
+    moves: []
   }
 }
 
