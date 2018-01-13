@@ -5,6 +5,14 @@
     border-radius: 5px;
     margin: 30px auto;
 
+    &.loading {
+        height: 460px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+
     .app-header {
         display: flex;
         justify-content: space-around;

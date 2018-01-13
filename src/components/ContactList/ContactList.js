@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ContactList.css';
 
 import ContactPreview from '../ContactPreview/ContactPreview'
+import './ContactList.css';
 
 const ContactList = (props) => {
   const contactsPreview = props.contacts.map( (contact, i) => {

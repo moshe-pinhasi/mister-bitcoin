@@ -3,5 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxPromise from 'redux-promise';
+import reducers from './reducers'
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore); 
+
+ReactDOM.render(
+    <Provider store={createStoreWithMiddleware(reducers)}>
+        <App />
+    </Provider>
+, document.getElementById('root'));
 registerServiceWorker();

@@ -1,6 +1,7 @@
 .contacts-page {
     position: relative;
-
+    height: 100%;
+    
     .search-container { 
         height: 40px;
         padding: 0 10px;
@@ -9,5 +10,19 @@
     .contacts-container {
         max-height: 360px; 
         overflow-x: auto;
+    }
+
+    .action-container {
+        position: absolute;
+        bottom: 20px;
+        right: 10px;
+
+        a {
+            padding: 5px 15px;
+            border-radius: 50%;
+            background: #246ee5;
+            color: #fff;
+            font-size: 30px;
+        }
     }
 }
