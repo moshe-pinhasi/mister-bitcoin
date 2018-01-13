@@ -27,6 +27,10 @@ class ContactPage extends Component {
         <div className="contacts-container">
             <ContactList contacts={this.props.contacts} />
         </div>
+
+        <div className="action-container">
+          <button>+</button>
+        </div>
       </div>
     );
   }

@@ -6,8 +6,6 @@ export const CONTACT_SAVED = 'CONTACT_SAVED'
 export const FILTER_CONTACTS = 'FILTER_CONTACTS'
 export const DELETE_CONTACT = 'DELETE_CONTACT'
 
-// export const ADD_CONTACT = 'ADD_CONTACT'
-
 export function loadContacts() {
     const request = ContactsService.getContacts()
     
