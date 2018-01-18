@@ -5,7 +5,7 @@ import { transferCoins } from '../../actions/user.actions'
 import {ContactSubNav} from '../../components/ContactSubNav/ContactSubNav'
 
 import imAvatar from '../../assets/img_avatar.png'
-import './ContactDetails.css'
+import './ContactDetails.scss'
 
 class ContactDetails  extends Component {
 

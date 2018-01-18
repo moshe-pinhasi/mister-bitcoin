@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import ContactPreview from '../ContactPreview/ContactPreview'
-import './ContactList.css';
+import './ContactList.scss';
 
 const ContactList = (props) => {
   const contactsPreview = props.contacts.map( (contact, i) => {

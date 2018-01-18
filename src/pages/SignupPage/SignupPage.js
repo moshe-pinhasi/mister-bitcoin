@@ -4,7 +4,7 @@ import { saveUser } from '../../actions/user.actions'
 import UserService from '../../services/UserService'
 import {Input} from '../../components/Input/Input'
 
-import './SignupPage.css'
+import './SignupPage.scss'
 
 class SignUpPage extends Component {
   

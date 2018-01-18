@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import './MovesListPage.css'
+import './MovesListPage.scss'
 
 class MovesListPage extends Component {
 

@@ -1,6 +1,6 @@
 import React  from 'react';
 
-import './ContactSubNav.css'
+import './ContactSubNav.scss'
 
 export const ContactSubNav = ({links}) => {
 

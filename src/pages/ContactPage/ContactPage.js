@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import ContactList from '../../components/ContactList/ContactList'
 import ContactFilter from '../../components/ContactFilter/ContactFilter'
 
-import './ContactPage.css'
+import './ContactPage.scss'
 
 class ContactPage extends Component {
 

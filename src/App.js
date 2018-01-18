@@ -12,7 +12,7 @@ import ContactEdit from './pages/ContactEdit/ContactEdit'
 import MovesListPage from './pages/MovesListPage/MovesListPage'
 import PrivateRoute from './containers/PrivateRoute'
 
-import './App.css'
+import './App.scss'
 import './assets/icon-font/flaticon.css'
 
 class App extends Component {
