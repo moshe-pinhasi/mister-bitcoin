@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Switch, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { loadUser } from './actions/user.actions'
 import { loadContacts } from './actions/contacts.actions'
 
@@ -54,8 +53,7 @@ class App extends Component {
 
             <div className="app-content">
               <Switch>
-                <PrivateRoute path="/contacts/edit/:id" component={ContactEdit} />
-                <PrivateRoute path="/contacts/edit/" component={ContactEdit} />
+                <PrivateRoute path="/contacts/edit/:id?" component={ContactEdit} />
                 <PrivateRoute path="/contacts/:id" component={ContactDetails} />
                 <PrivateRoute path="/contacts" component={ContactPage} />
                 <PrivateRoute path="/moves" component={MovesListPage} />
@@ -70,8 +68,4 @@ class App extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({loadUser, loadContacts}, dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default connect(null, {loadUser, loadContacts})(App);

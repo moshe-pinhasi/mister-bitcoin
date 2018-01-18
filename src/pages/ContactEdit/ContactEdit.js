@@ -8,6 +8,11 @@ import ContactService from '../../services/ContactService'
 
 import imAvatar from '../../assets/img_avatar.png'
 
+const NAV_NAMES = {
+  BACK: 'Back',
+  DELETE: 'Delete'
+}
+
 class ContactEdit  extends Component {
 
   constructor(props) {
@@ -16,10 +21,12 @@ class ContactEdit  extends Component {
     const contact = ContactService.getEmptyContact()
     this.state =  { contact }
 
-    this.links = [
-      {name: 'Back', onClicked: this.onBackClicked}, 
-      {name: 'Delete', onClicked: this.onDeleteContact}
-    ]
+    this.navOptions = [
+      {name: NAV_NAMES.BACK, onClicked: this.onBackClicked}, 
+      {name: NAV_NAMES.DELETE, onClicked: this.onDeleteContact}
+    ];
+
+    this.setSubNav(contact)
   }
 
   componentDidMount() {
@@ -30,7 +37,15 @@ class ContactEdit  extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({contact: nextProps.contact})
+    const contact = nextProps.contact
+    this.setState({contact})
+
+    this.setSubNav(contact)  
+  }
+
+  setSubNav(contact) {
+    this.links = this.navOptions.filter( nav => 
+      (nav.name !== NAV_NAMES.DELETE || contact._id))
   }
 
   onInputChange = (fieldName, value) => {
@@ -42,8 +57,9 @@ class ContactEdit  extends Component {
     event.preventDefault()
     const contact = this.state.contact
     
+    const nextUrl = contact._id ? `/contacts/${contact._id}` : `/contacts`
     this.props.saveContact(contact).then ( () =>
-        this.props.history.push(`/contacts/${contact._id}`))  
+        this.props.history.push(nextUrl))
   }
 
   onBackClicked = (event) => {
