@@ -1,0 +1,14 @@
+.contact-sub-nav {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  margin: 0 0 10px; }
+  .contact-sub-nav button {
+    border: none;
+    font-size: 14px;
+    background: none;
+    outline: none; }
+    .contact-sub-nav button:hover {
+      cursor: pointer; }
+  .contact-sub-nav button:not(:last-child) {
+    margin: 0 10px 0 0; }
