@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { loadContacts, filterContacts } from '../../actions/contacts.actions'
 import { Link } from 'react-router-dom';
 
-import ContactList from '../../components/ContactList/ContactList'
-import ContactFilter from '../../components/ContactFilter/ContactFilter'
+import ContactList from 'Components/ContactList/ContactList'
+import ContactFilter from 'Components/ContactFilter/ContactFilter'
 
 import './ContactPage.scss'
 

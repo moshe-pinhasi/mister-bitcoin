@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import ContactPreview from '../ContactPreview/ContactPreview'
+import ContactPreview from 'Components/ContactPreview/ContactPreview'
+
 import './ContactList.scss';
 
 const ContactList = (props) => {

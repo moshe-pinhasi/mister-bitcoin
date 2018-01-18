@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import BitcoinService from '../../services/BitcoinService'
+import BitcoinService from 'Services/BitcoinService'
 
 class HomePage extends Component {
 

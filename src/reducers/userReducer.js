@@ -1,4 +1,4 @@
-import { USER_SAVED, USER_LOADED, TRANSFER_COINS } from '../actions/user.actions';
+import { USER_SAVED, USER_LOADED, TRANSFER_COINS } from 'Actions/user.actions';
 
 const user = (state = null, action) => {
     switch (action.type) {

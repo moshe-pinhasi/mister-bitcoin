@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { saveUser } from '../../actions/user.actions'
-import UserService from '../../services/UserService'
-import {Input} from '../../components/Input/Input'
+
+import { saveUser } from 'Actions/user.actions'
+import UserService from 'Services/UserService'
+import {Input} from 'Components/Input/Input'
 
 import './SignupPage.scss'
 

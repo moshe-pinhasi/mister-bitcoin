@@ -1,10 +1,11 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux'
-import { fetchContact } from '../../actions/contacts.actions'
-import { transferCoins } from '../../actions/user.actions'
-import {ContactSubNav} from '../../components/ContactSubNav/ContactSubNav'
 
-import imAvatar from '../../assets/img_avatar.png'
+import { fetchContact } from 'Actions/contacts.actions'
+import { transferCoins } from 'Actions/user.actions'
+import { ContactSubNav } from 'Components/ContactSubNav/ContactSubNav'
+
+import imAvatar from 'Assets/img_avatar.png'
 import './ContactDetails.scss'
 
 class ContactDetails  extends Component {

@@ -1,12 +1,12 @@
 
 import React, { Component }  from 'react';
 import { connect } from 'react-redux'
-import { fetchContact, saveContact, deleteContact } from '../../actions/contacts.actions'
-import { Input } from '../../components/Input/Input'
-import { ContactSubNav } from '../../components/ContactSubNav/ContactSubNav'
-import ContactService from '../../services/ContactService'
+import { fetchContact, saveContact, deleteContact } from 'Actions/contacts.actions'
+import { Input } from 'Components/Input/Input'
+import { ContactSubNav } from 'Components/ContactSubNav/ContactSubNav'
+import ContactService from 'Services/ContactService'
 
-import imAvatar from '../../assets/img_avatar.png'
+import imAvatar from 'Assets/img_avatar.png'
 
 const NAV_NAMES = {
   BACK: 'Back',
