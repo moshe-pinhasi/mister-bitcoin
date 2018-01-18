@@ -1,5 +1,5 @@
-import UserService from '../services/UserService'
-import MoveService from '../services/MoveService'
+import UserService from 'Services/UserService'
+import MoveService from 'Services/MoveService'
 
 export const USER_SAVED = 'USER/USER_SAVED'
 export const USER_LOADED = 'USER/USER_LOADED'

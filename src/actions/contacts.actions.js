@@ -1,51 +1,41 @@
-import ContactsService from '../services/ContactService'
+import ContactsService from 'Services/ContactService'
 
 export const SET_CONTACTS = 'CONTACTS/SET_CONTACTS'
 export const SELECTED_CONTACT = 'CONTACTS/SELECTED_CONTACT'
 export const CONTACT_SAVED = 'CONTACTS/CONTACT_SAVED'
-export const FILTER_CONTACTS = 'CONTACTS/FILTER_CONTACTS'
+export const CONTACT_ADDED = 'CONTACTS/CONTACT_ADDED'
 export const DELETE_CONTACT = 'CONTACTS/DELETE_CONTACT'
 
-export function loadContacts() {
-    const request = ContactsService.getContacts()
+export function loadContacts(query = null) {
     
     return {
         type: SET_CONTACTS,
-        payload: request
+        payload: ContactsService.getContacts(query)
     };
 }
 
 export function saveContact(contact, callback) {
-    const request = ContactsService.saveContact(contact).then(callback)
-
     return {
-        type: CONTACT_SAVED,
-        payload: request
+        type: contact._id ? CONTACT_SAVED : CONTACT_ADDED,
+        payload: ContactsService.saveContact(contact).then(callback)
     }
 }
 
-export function fetchContact(id) {
-    const request = ContactsService.getContactById(id)
-    return {
-        type: SELECTED_CONTACT,
-        payload: request
-    };
-}
-
-export function filterContacts(term) {
-    const request = ContactsService.filter(term)
+export function fetchContact(contact) {
     
     return {
-        type: FILTER_CONTACTS,
-        payload: request
+        type: SELECTED_CONTACT,
+        payload: ContactsService.getContactById(contact)
     };
 }
 
-export function deleteContact(id, callback) {
-    const request = ContactsService.deleteContact(id).then(callback)
+export function deleteContact(contact, callback) {
     
     return {
         type: DELETE_CONTACT,
-        payload: request
+        payload: ContactsService.deleteContact(contact).then(contact => {
+            callback()
+            return contact
+        })
     };
 }

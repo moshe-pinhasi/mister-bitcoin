@@ -1,6 +1,6 @@
 import uniqid from 'uniqid'
 
-const contacts = [
+let contacts = [
   {
     "_id": "5a56640269f443a5d64b32ca",
     "picture": "../../assets/image_avatar.png",
@@ -149,9 +149,20 @@ function sort(arr) {
   })
 }
 
-function getContacts () {
-  return new Promise((resolve, reject) => { 
-    resolve(sort(contacts))
+function getContacts (query = null) {
+  return new Promise((resolve, reject) => {
+    var _contacts = contacts
+    if (query) {
+      var term = query.term.toLocaleLowerCase()
+      _contacts = contacts.filter( contact => (
+        contact.name.toLocaleLowerCase().includes(term) ||
+        contact.phone.toLocaleLowerCase().includes(term) ||
+        contact.email.toLocaleLowerCase().includes(term)
+      ))
+        
+    }
+    
+    resolve(sort(_contacts))
   })
 }
 
@@ -162,25 +173,18 @@ function getContactById (id) {
     })
 }
 
-function deleteContact(id) {
+function deleteContact(contact) {
   return new Promise((resolve, reject) => { 
-    const index = contacts.findIndex( contact => contact._id === id)
-    if (index !== -1) {
-      contacts.splice(index, 1)
-    }
-
-    resolve(contacts)
+    contacts = contacts.filter(c => c._id !== contact._id)
+    resolve(contact)
   })
 }
 
 function _updateContact(contact) {
   return new Promise((resolve, reject) => { 
-    const index = contacts.findIndex( c => contact._id === c._id)
-    if (index !== -1) {
-      contacts[index] = contact
-    }
+    contacts = contacts.map(c => (c._id !== contact._id) ? c : contact)
 
-    resolve(contacts)
+    resolve(contact)
   })
 }
 
@@ -188,7 +192,7 @@ function _addContact(contact) {
   return new Promise((resolve, reject) => { 
     contact._id = uniqid()
     contacts.push(contact)
-    resolve(contacts)
+    resolve(contact)
   })
 }
 
@@ -205,24 +209,10 @@ function getEmptyContact() {
   }
 }
 
-function filter (term) {
-  term = term.toLocaleLowerCase()
-  return new Promise((resolve, reject) => { 
-    const c = contacts.filter( contact => {
-      return contact.name.toLocaleLowerCase().includes(term) ||
-             contact.phone.toLocaleLowerCase().includes(term) ||
-             contact.email.toLocaleLowerCase().includes(term)
-    })
-
-    resolve(c)
-  })
-}
-
 export default {
   getContacts,
   getContactById,
   deleteContact,
-  filter,
   saveContact,
   getEmptyContact
 }

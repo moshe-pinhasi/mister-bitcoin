@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { loadContacts, filterContacts } from '../../actions/contacts.actions'
+import { loadContacts } from '../../actions/contacts.actions'
 import { Link } from 'react-router-dom';
 
 import ContactList from 'Components/ContactList/ContactList'
@@ -15,7 +15,7 @@ class ContactPage extends Component {
   }
 
   contactSearch = (term) => {
-    this.props.filterContacts(term)
+    this.props.loadContacts({term})
   }
   
   render() {
@@ -42,4 +42,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {loadContacts, filterContacts})(ContactPage);
+export default connect(mapStateToProps, {loadContacts})(ContactPage);

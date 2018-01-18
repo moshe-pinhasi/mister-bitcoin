@@ -71,7 +71,7 @@ class ContactEdit  extends Component {
   }
 
   onDeleteContact = (event) => {
-    this.props.deleteContact(this.state.contact._id, () =>
+    this.props.deleteContact(this.state.contact, () =>
           this.props.history.push(`/contacts`))
   }
   
