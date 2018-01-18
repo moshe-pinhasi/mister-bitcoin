@@ -6,17 +6,19 @@ export const USER_LOADED = 'USER/USER_LOADED'
 export const TRANSFER_COINS = 'USER/TRANSFER_COINS'
 
 export function saveUser(user, callback) {
-    const request = UserService.saveUser(user).then(callback)
-
+    
     return {
         type: USER_SAVED,
-        payload: request
+        payload: UserService.saveUser(user).then(user => {
+            callback()
+            return user
+        })
     }
 }
 
 export function loadUser(callback) {
     var _user;
-    const request = UserService.loadUser()
+    const promise = UserService.loadUser()
         .then( user => {
             if (!user) return
             _user = user
@@ -28,7 +30,7 @@ export function loadUser(callback) {
 
     return {
         type: USER_LOADED,
-        payload: request
+        payload: promise
     };
 }
 
@@ -42,7 +44,7 @@ export function transferCoins(from, to, amount, onSuccess, onError) {
         };
     }
 
-    const request = MoveService.addMove(to, amount)
+    const promise = MoveService.addMove(to, amount)
         .then( moves => {
             from.moves = moves
             from.coins = from.coins - amount
@@ -54,6 +56,6 @@ export function transferCoins(from, to, amount, onSuccess, onError) {
 
     return {
         type: TRANSFER_COINS,
-        payload: request
+        payload: promise
     };
 }
