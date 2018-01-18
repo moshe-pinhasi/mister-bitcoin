@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { loadContacts, filterContacts } from '../../actions/contacts.actions'
 import { Link } from 'react-router-dom';
 
@@ -43,8 +42,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({loadContacts, filterContacts}, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactPage);
+export default connect(mapStateToProps, {loadContacts, filterContacts})(ContactPage);

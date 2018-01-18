@@ -1,9 +1,8 @@
 import React, { Component }  from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { fetchContact } from '../../actions/contacts.actions'
 import { transferCoins } from '../../actions/user.actions'
+import {ContactSubNav} from '../../components/ContactSubNav/ContactSubNav'
 
 import imAvatar from '../../assets/img_avatar.png'
 import './ContactDetails.css'
@@ -13,10 +12,12 @@ class ContactDetails  extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      amount: '',
-      message: ''
-    }
+    this.state = { amount: '', message: ''}
+
+    this.links = [
+      {name: 'Back', onClicked: this.onBackClicked}, 
+      {name: 'Edit', onClicked: this.onDeleteContact}
+    ]
   }
 
   componentDidMount() {
@@ -44,9 +45,15 @@ class ContactDetails  extends Component {
   }
 
   onInputChange = (event) => {
-    const state = Object.assign({}, this.state, {amount: event.target.value})
+    const state = {...this.state, amount: event.target.value}
     this.setState(state)
   }
+
+  onBackClicked = (event) =>
+    this.props.history.push('/contacts')
+  
+  onDeleteContact = (event) => 
+    this.props.history.push(`/contacts/edit/${this.props.contact._id}`)
 
   render() {
     const contact = this.props.contact || {}
@@ -54,10 +61,10 @@ class ContactDetails  extends Component {
 
     return (
       <div className="contact-details">
-        <header className="contact-details-header">
-          <Link to={`/contacts`} >Back</Link>
-          <Link to={`/contacts/edit/${contact._id}`}>Edit</Link>
-        </header>
+        <div className="contact-details-header">
+          <ContactSubNav links={this.links} />
+        </div>
+
         <div className="contact-details-body">
           <img src={imAvatar} alt="Person" width="96" height="96" />
           <div className="contact-details-row">Name: {contact.name}</div>
@@ -92,8 +99,4 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchContact, transferCoins}, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactDetails);
+export default connect(mapStateToProps, {fetchContact, transferCoins})(ContactDetails);

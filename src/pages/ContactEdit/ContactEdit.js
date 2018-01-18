@@ -1,34 +1,25 @@
-import React, { Component }  from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { fetchContact, saveContact, deleteContact } from '../../actions/contacts.actions'
 
+import React, { Component }  from 'react';
+import { connect } from 'react-redux'
+import { fetchContact, saveContact, deleteContact } from '../../actions/contacts.actions'
+import { Input } from '../../components/Input/Input'
+import { ContactSubNav } from '../../components/ContactSubNav/ContactSubNav'
 import ContactService from '../../services/ContactService'
 
 import imAvatar from '../../assets/img_avatar.png'
-import './ContactEdit.css'
-
-
-const Header = ({contact, onDeleteContact}) => {
-  const backUrl = contact._id ? `/contacts/${contact._id}` : `/contacts`
-
-  return (
-    <header className="contact-edit-header">
-      <Link to={backUrl}>Back</Link>
-      {contact._id ? (<Link to='/' onClick={onDeleteContact}>Delete</Link>) : ''}
-    </header>
-  )
-}
 
 class ContactEdit  extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state =  { 
-      contact: ContactService.getEmptyContact() 
-    }
+    const contact = ContactService.getEmptyContact()
+    this.state =  { contact }
+
+    this.links = [
+      {name: 'Back', onClicked: this.onBackClicked}, 
+      {name: 'Delete', onClicked: this.onDeleteContact}
+    ]
   }
 
   componentDidMount() {
@@ -42,11 +33,9 @@ class ContactEdit  extends Component {
     this.setState({contact: nextProps.contact})
   }
 
-  onInputChange(field) {
-    return (event) => {
-      const contact = Object.assign({}, this.state.contact, {[field]: event.target.value})
-      this.setState({contact})
-    }
+  onInputChange = (fieldName, value) => {
+    const contact = {...this.state.contact, [fieldName]: value}
+    this.setState({contact})
   }
 
   onFormSubmit = (event) => {
@@ -57,49 +46,42 @@ class ContactEdit  extends Component {
         this.props.history.push(`/contacts/${contact._id}`))  
   }
 
+  onBackClicked = (event) => {
+    const contact = this.state.contact
+    const backUrl = contact._id ? `/contacts/${contact._id}` : `/contacts`
+    this.props.history.push(backUrl)
+  }
+
   onDeleteContact = (event) => {
-    event.preventDefault()
     this.props.deleteContact(this.state.contact._id, () =>
           this.props.history.push(`/contacts`))
   }
   
-  render() {
-    const {contact} = this.state  
+  renderFields() {
+    const contact = this.state.contact
+    const fields = ['name', 'phone', 'email']
+    return (
+      fields
+        .map( fieldName => ({name: fieldName, title: fieldName, value: contact[fieldName]}))
+        .map(field => (<Input key={field.name} field={field} onInput={this.onInputChange} /> ))
+    )
+  }
 
+  render() {
     return (
       <div className="contact-edit">
-          <Header contact={contact} onDeleteContact={this.onDeleteContact}/>
-
+          <div className="contact-edit-header">
+            <ContactSubNav links={this.links} />
+          </div>
           <div className="contact-edit-body">
               <img src={imAvatar} alt="Person" width="96" height="96" />
               <form onSubmit={this.onFormSubmit} className="contact-edit-form">
-                  <div className="form-group">
-                    <label>Name:</label>
-                    <input 
-                        placeholder="Name"
-                        value={contact.name}
-                        onInput={this.onInputChange('name')}/>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Phone:</label>
-                    <input 
-                        placeholder="Phone"
-                        value={contact.phone}
-                        onInput={this.onInputChange('phone')}/>
-                  </div>
-
-                  <div className="form-group">
-                    <label>Email:</label>
-                    <input 
-                        placeholder="Email"
-                        value={contact.email}
-                        onInput={this.onInputChange('email')}/>
-                  </div>
-                  
-                  <div className="form-actions-container">
-                    <button type="submit">Save</button>
-                  </div>
+                <div className="form-fields">
+                  {this.renderFields()} 
+                </div>
+                <div className="form-actions-container">
+                  <button type="submit">Save</button>
+                </div>
               </form>
           </div>
       </div>
@@ -110,11 +92,7 @@ class ContactEdit  extends Component {
 function mapStateToProps(state) {
   return {
     contact: state.selectedContact
-  };
+  }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchContact, saveContact, deleteContact}, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactEdit);
+export default connect(mapStateToProps, {fetchContact, saveContact, deleteContact})(ContactEdit);

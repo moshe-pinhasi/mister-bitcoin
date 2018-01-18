@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { saveUser } from '../../actions/user.actions'
 import UserService from '../../services/UserService'
+import {Input} from '../../components/Input/Input'
 
 import './SignupPage.css'
 
@@ -16,8 +16,8 @@ class SignUpPage extends Component {
     }
   }
 
-  onInputChange = (event) => {
-    const user = Object.assign({}, this.state.user, {name: event.target.value})
+  onInputChange = (fieldName, value) => {
+    const user = {...this.state.user, name: value}
     this.setState({user})
   }
 
@@ -30,6 +30,7 @@ class SignUpPage extends Component {
 
   render() {
     const {user} = this.state  
+    const field = {name: 'name', value: user.name}
 
     return (
       <div className="signup">
@@ -37,13 +38,8 @@ class SignUpPage extends Component {
           <div className="signup-body">
               <form onSubmit={this.onFormSubmit} className="signup-form">
                   <div>Please enter your name:</div>
-                  <div className="form-group">
-                    
-                    <input 
-                        placeholder="Name"
-                        value={user.name}
-                        onInput={this.onInputChange}/>
-                  </div>
+
+                  <Input field={field} onInput={this.onInputChange} />
                   
                   <div className="form-actions-container">
                     <button type="submit">Sign up</button>
@@ -55,8 +51,4 @@ class SignUpPage extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({saveUser}, dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(SignUpPage);
+export default connect(null, {saveUser})(SignUpPage);
