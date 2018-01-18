@@ -15,6 +15,8 @@ const NAV_NAMES = {
 
 class ContactEdit  extends Component {
 
+  fields = ['name', 'phone', 'email']
+
   constructor(props) {
     super(props)
 
@@ -75,9 +77,9 @@ class ContactEdit  extends Component {
   
   renderFields() {
     const contact = this.state.contact
-    const fields = ['name', 'phone', 'email']
+    
     return (
-      fields
+      this.fields
         .map( fieldName => ({name: fieldName, title: fieldName, value: contact[fieldName]}))
         .map(field => (<Input key={field.name} field={field} onInput={this.onInputChange} /> ))
     )
