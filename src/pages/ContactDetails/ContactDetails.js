@@ -8,7 +8,8 @@ import { ContactSubNav } from 'Components/ContactSubNav/ContactSubNav'
 import { createSelector } from 'reselect'
 import { getSelectedContactSelector, getUserSelector } from 'Selectors'
 
-import imAvatar from 'Assets/img_avatar.png'
+import { ImageAvatar } from 'Components/ImageAvatar/ImageAvatar'
+
 import './ContactDetails.scss'
 
 class ContactDetails  extends Component {
@@ -70,7 +71,7 @@ class ContactDetails  extends Component {
         </div>
 
         <div className="contact-details-body">
-          <img src={imAvatar} alt="Person" width="96" height="96" />
+          <ImageAvatar />
           <div className="contact-details-row">Name: {contact.name}</div>
           <div className="contact-details-row">Phone: {contact.phone}</div>
           <div className="contact-details-row">Email: {contact.email}</div>

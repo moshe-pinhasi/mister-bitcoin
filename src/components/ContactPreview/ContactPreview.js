@@ -2,12 +2,12 @@ import React from 'react';
 
 import './ContactPreview.scss'
 
-import imAvatar from 'Assets/img_avatar.png'
+import { ImageAvatar } from 'Components/ImageAvatar/ImageAvatar'
 
 const ContactPreview = ({contact}) => {
   return (
     <div className="contact-preview">
-      <img src={imAvatar} alt="Person" width="96" height="96" />
+      <ImageAvatar />
       <span>{contact.name}</span>
     </div>
   )
