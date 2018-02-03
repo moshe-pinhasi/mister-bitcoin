@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
+import { createSelector } from 'reselect'
+import { getUserSelector } from 'Selectors'
+
 import BitcoinService from 'Services/BitcoinService'
 
 class HomePage extends Component {
@@ -35,10 +39,11 @@ class HomePage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user
-  };
-}
+const getUser = createSelector(
+  [getUserSelector],
+  user => ({user})
+)
+
+const mapStateToProps = (state) => getUser(state)
 
 export default connect(mapStateToProps)(HomePage);

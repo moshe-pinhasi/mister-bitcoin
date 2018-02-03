@@ -5,6 +5,9 @@ import { fetchContact } from 'Actions/contacts.actions'
 import { transferCoins } from 'Actions/user.actions'
 import { ContactSubNav } from 'Components/ContactSubNav/ContactSubNav'
 
+import { createSelector } from 'reselect'
+import { getSelectedContactSelector, getUserSelector } from 'Selectors'
+
 import imAvatar from 'Assets/img_avatar.png'
 import './ContactDetails.scss'
 
@@ -93,11 +96,11 @@ class ContactDetails  extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    contact: state.selectedContact,
-    user: state.user
-  };
-}
+const getProps = createSelector(
+  [getSelectedContactSelector, getUserSelector],
+  (contact, user) => ({contact, user})
+)
+
+const mapStateToProps = (state) => getProps(state)
 
 export default connect(mapStateToProps, {fetchContact, transferCoins})(ContactDetails);

@@ -3,10 +3,14 @@ import { connect } from 'react-redux'
 import { loadContacts } from '../../actions/contacts.actions'
 import { Link } from 'react-router-dom';
 
+import { createSelector } from 'reselect'
+import { getContactsSelector } from 'Selectors'
+
 import ContactList from 'Components/ContactList/ContactList'
 import ContactFilter from 'Components/ContactFilter/ContactFilter'
 
 import './ContactPage.scss'
+
 
 class ContactPage extends Component {
 
@@ -36,10 +40,11 @@ class ContactPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    contacts: state.contacts
-  };
-}
+const getContacts = createSelector(
+  getContactsSelector,
+  contacts => ({contacts})
+)
+
+const mapStateToProps = (state) => getContacts(state)
 
 export default connect(mapStateToProps, {loadContacts})(ContactPage);
