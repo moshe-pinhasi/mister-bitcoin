@@ -10,7 +10,7 @@ import { Input } from 'Components/Input/Input'
 import { ContactSubNav } from 'Components/ContactSubNav/ContactSubNav'
 import ContactService from 'Services/ContactService'
 
-import imAvatar from 'Assets/img_avatar.png'
+import { ImageAvatar } from 'Components/ImageAvatar/ImageAvatar'
 
 const NAV_NAMES = {
   BACK: 'Back',
@@ -96,7 +96,7 @@ class ContactEdit  extends Component {
             <ContactSubNav links={this.links} />
           </div>
           <div className="contact-edit-body">
-              <img src={imAvatar} alt="Person" width="96" height="96" />
+              <ImageAvatar />
               <form onSubmit={this.onFormSubmit} className="contact-edit-form">
                 <div className="form-fields">
                   {this.renderFields()} 
