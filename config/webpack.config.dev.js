@@ -90,6 +90,7 @@ module.exports = {
       Actions: path.resolve(__dirname, '../src/actions/'),
       Services: path.resolve(__dirname, '../src/services/'),
       Assets: path.resolve(__dirname, '../src/assets/'),
+      Selectors: path.resolve(__dirname, '../src/selectors/'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',

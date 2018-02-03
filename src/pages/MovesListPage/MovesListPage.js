@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
+import { createSelector } from 'reselect'
+import { getContactsSelector, getUserSelector } from 'Selectors'
+
+
 import './MovesListPage.scss'
 
 class MovesListPage extends Component {
@@ -14,16 +18,11 @@ class MovesListPage extends Component {
 
     return moves.map( move => {
       const contactId = move.to
-      if (!contactsMap[contactId]) {
-        return (
-          <div></div>
-        )
-      }
-      
+      const contactName = contactsMap[contactId] ? contactsMap[contactId].name : 'Contact deleted'
       var date = new Date(move.at)
       return (
           <li key={move.at} className="moves-list-item">
-            <div>To: {contactsMap[contactId].name}</div>
+            <div>To: {contactName}</div>
             <div>Amout: {move.amount} coins</div>
             <div>At: {date.toLocaleString()}</div>
             <hr />
@@ -47,11 +46,11 @@ class MovesListPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    contacts: state.contacts,
-    user: state.user
-  };
-}
+const getProps = createSelector(
+  [getContactsSelector, getUserSelector],
+  (contacts, user) => ({contacts, user})
+)
+
+const mapStateToProps = (state) => getProps(state)
 
 export default connect(mapStateToProps)(MovesListPage);

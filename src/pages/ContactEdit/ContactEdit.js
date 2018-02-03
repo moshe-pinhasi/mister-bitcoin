@@ -2,6 +2,10 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux'
 import { fetchContact, saveContact, deleteContact } from 'Actions/contacts.actions'
+
+import { createSelector } from 'reselect'
+import { getSelectedContactSelector } from 'Selectors'
+
 import { Input } from 'Components/Input/Input'
 import { ContactSubNav } from 'Components/ContactSubNav/ContactSubNav'
 import ContactService from 'Services/ContactService'
@@ -107,10 +111,11 @@ class ContactEdit  extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    contact: state.selectedContact
-  }
-}
+const getProps = createSelector(
+  [getSelectedContactSelector],
+  contact => ({contact})
+)
+
+const mapStateToProps = (state) => getProps(state)
 
 export default connect(mapStateToProps, {fetchContact, saveContact, deleteContact})(ContactEdit);
